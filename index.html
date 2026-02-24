@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abner Domínguez | Cybersecurity Engineer</title>
 
+<style>
+    body {
+        margin: 0;
+        background: black;
+        color: #00ff88;
+        font-family: "Courier New", monospace;
+        overflow-x: hidden;
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 20px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        border-bottom: 1px solid #00ff88;
+        padding-bottom: 5px;
+        margin-top: 40px;
+    }
+
+    .card {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #00ff88;
+        background-color: rgba(0, 255, 136, 0.05);
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    ul li::before {
+        content: "> ";
+    }
+
+    a {
+        color: #00ff88;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .glow {
+        text-shadow: 0 0 5px #00ff88,
+                     0 0 10px #00ff88,
+                     0 0 20px #00ff88;
+    }
+
+    footer {
+        margin-top: 60px;
+        opacity: 0.6;
+    }
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+    <h1 class="glow">Abner Domínguez</h1>
+    <p>Cybersecurity Engineer | Threat Detection | Secure Architecture</p>
+
+    <h2>~/about_me</h2>
+    <div class="card">
+        <p>
+            Cybersecurity Engineer specialized in secure infrastructures,
+            enterprise hardening, and risk reduction strategies.
+        </p>
+    </div>
+
+    <h2>~/core_skills</h2>
+    <div class="card">
+        <ul>
+            <li>Network Security & Firewalls</li>
+            <li>SIEM & Threat Hunting</li>
+            <li>Vulnerability Assessment</li>
+            <li>Cloud Security</li>
+            <li>Incident Response</li>
+        </ul>
+    </div>
+
+    <h2>~/contact</h2>
+    <div class="card">
+        <p>> Email: abner@example.com</p>
+        <p>> LinkedIn: <a href="#">linkedin.com/in/yourprofile</a></p>
+        <p>> GitHub: <a href="#">github.com/youruser</a></p>
+    </div>
+
+    <footer>
+        root@abner:~# © 2026 Abner Domínguez
+    </footer>
+</div>
+
+<script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+
+    const drops = [];
+    for (let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#00ff88";
+        ctx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = letters.charAt(Math.floor(Math.random() * letters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+
+            drops[i]++;
+        }
+    }
+
+    setInterval(draw, 35);
+
+    window.addEventListener("resize", () => {
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+    });
+</script>
+
+</body>
+</html>
